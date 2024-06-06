@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../core/config/app_colors.dart';
+import '../../core/widgets/appbar/home_appbar.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -12,32 +13,31 @@ class SettingsPage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 6),
-        const Text(
-          'Settings',
-          style: TextStyle(
-            color: AppColors.primaryWhite,
-            fontSize: 24,
-            fontWeight: FontWeight.w700,
+        const HomeAppBar(title: 'Settings'),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              const SizedBox(height: 20),
+              _SettingsTile(
+                title: 'Share with friends',
+                icon: 'share',
+                onPressed: () {},
+              ),
+              const SizedBox(height: 8),
+              _SettingsTile(
+                title: 'Terms of use',
+                icon: 'note',
+                onPressed: () {},
+              ),
+              const SizedBox(height: 8),
+              _SettingsTile(
+                title: 'Privacy Policy',
+                icon: 'lock',
+                onPressed: () {},
+              ),
+            ],
           ),
-        ),
-        const SizedBox(height: 26),
-        _SettingsTile(
-          title: 'Share with friends',
-          icon: 'share',
-          onPressed: () {},
-        ),
-        const SizedBox(height: 8),
-        _SettingsTile(
-          title: 'Terms of use',
-          icon: 'note',
-          onPressed: () {},
-        ),
-        const SizedBox(height: 8),
-        _SettingsTile(
-          title: 'Privacy Policy',
-          icon: 'lock',
-          onPressed: () {},
         ),
       ],
     );

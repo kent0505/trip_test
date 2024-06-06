@@ -20,6 +20,7 @@ class PlansCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 400,
+      margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
         color: AppColors.primaryWhite8,
         borderRadius: BorderRadius.circular(16),

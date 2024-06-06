@@ -6,19 +6,23 @@ class StageTitle extends StatelessWidget {
   const StageTitle({
     super.key,
     required this.title,
-    this.onPressed,
+    this.index = 0,
+    this.onAdd,
+    this.onRemove,
   });
 
   final String title;
-  final void Function()? onPressed;
+  final int index;
+  final void Function()? onAdd;
+  final void Function()? onRemove;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: SizedBox(
         height: 22,
-        width: 432,
+        width: 400,
         child: Row(
           children: [
             Text(
@@ -30,24 +34,34 @@ class StageTitle extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            onPressed != null
-                ? CupertinoButton(
-                    onPressed: onPressed,
-                    padding: EdgeInsets.zero,
-                    child: const Row(
-                      children: [
-                        Text(
-                          'Add',
-                          style: TextStyle(
-                            color: AppColors.accent,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
+            if (onAdd != null) ...[
+              if (index >= 1) ...[
+                CupertinoButton(
+                  onPressed: onRemove,
+                  padding: EdgeInsets.zero,
+                  child: const Text(
+                    'Remove',
+                    style: TextStyle(
+                      color: AppColors.accent,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
                     ),
-                  )
-                : Container(),
+                  ),
+                ),
+              ],
+              CupertinoButton(
+                onPressed: onAdd,
+                padding: EdgeInsets.zero,
+                child: const Text(
+                  'Add',
+                  style: TextStyle(
+                    color: AppColors.accent,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
           ],
         ),
       ),

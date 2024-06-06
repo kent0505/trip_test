@@ -1,44 +1,12 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../core/config/app_colors.dart';
-import '../plans/pages/plans_page.dart';
-import '../settings/settings_page.dart';
-import 'bloc/home_bloc.dart';
+import '../../../core/config/app_colors.dart';
+import '../bloc/home_bloc.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: BlocBuilder<HomeBloc, HomeState>(
-                builder: (context, state) {
-                  if (state is HomeInitial) {
-                    return const PlansPage();
-                  } else {
-                    return const SettingsPage();
-                  }
-                },
-              ),
-            ),
-            const _CustomNavBar(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _CustomNavBar extends StatelessWidget {
-  const _CustomNavBar();
+class NavBar extends StatelessWidget {
+  const NavBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +24,7 @@ class _CustomNavBar extends StatelessWidget {
               children: [
                 _NavBarButton(
                   title: 'Plans',
-                  active: state is HomeInitial,
+                  active: state is HomePlans,
                   onPressed: () {
                     context.read<HomeBloc>().add(ChangePageEvent(index: 0));
                   },

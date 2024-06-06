@@ -12,4 +12,7 @@ final theme = ThemeData(
     selectionColor: AppColors.accent,
     selectionHandleColor: AppColors.accent,
   ),
+  colorScheme: ColorScheme.fromSwatch(
+    accentColor: AppColors.accent,
+  ),
 );
