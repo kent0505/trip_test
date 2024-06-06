@@ -7,10 +7,12 @@ class TxtField extends StatelessWidget {
     super.key,
     required this.controller,
     required this.hintText,
+    this.onChanged,
   });
 
   final TextEditingController controller;
   final String hintText;
+  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +20,7 @@ class TxtField extends StatelessWidget {
       width: 400,
       child: TextField(
         controller: controller,
+        textCapitalization: TextCapitalization.sentences,
         style: const TextStyle(
           color: AppColors.primaryWhite,
           fontSize: 16,
@@ -41,6 +44,10 @@ class TxtField extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
           ),
         ),
+        onTapOutside: (event) {
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
+        onChanged: onChanged,
       ),
     );
   }

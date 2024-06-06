@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:trip_test/core/utils.dart';
 
 import '../../core/config/app_colors.dart';
 import '../../core/widgets/buttons/primary_button.dart';
@@ -47,8 +48,10 @@ class OnboardingPage extends StatelessWidget {
             PrimaryButton(
               title: 'Get started',
               borderRadius: 12,
-              onPressed: () {
-                context.go('/home');
+              onPressed: () async {
+                await saveBool('onboarding', false).then((value) {
+                  context.go('/home');
+                });
               },
             ),
             const SizedBox(height: 24),

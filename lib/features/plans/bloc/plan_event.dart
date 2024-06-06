@@ -15,3 +15,7 @@ class PlanHotelEvent extends PlanEvent {}
 class PlanNoteEvent extends PlanEvent {}
 
 class PlanAddEvent extends PlanEvent {}
+
+class PlanNextEvent extends PlanEvent {}
+
+class PlanPreviousEvent extends PlanEvent {}

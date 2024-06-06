@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/config/app_colors.dart';
+import '../../../core/utils.dart';
+import '../models/plan.dart';
 
 class PlansCard extends StatelessWidget {
   const PlansCard({
     super.key,
+    required this.plan,
     required this.onPressed,
   });
 
+  final Plan plan;
   final void Function() onPressed;
 
   @override
@@ -22,20 +26,12 @@ class PlansCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const _PlansTitle(title: 'Travel to Italy'),
-          Divider(
-            height: 1,
-            color: AppColors.primaryWhite8,
-          ),
+          _PlansTitle(title: plan.name),
+          Divider(height: 1, color: AppColors.primaryWhite8),
           const SizedBox(height: 12),
-          const _PlansCountry(
-            fromCity: 'Paris',
-            fromCountry: 'France',
-            toCity: 'Rome',
-            toCountry: 'Italy',
-          ),
+          _PlansCountry(plan: plan),
           const SizedBox(height: 24),
-          const _PlansPrice(price: 2025),
+          _PlansPrice(price: getPlanTotalAmount(plan)),
           const SizedBox(height: 8),
           _PlansCardButton(onPressed: onPressed),
           const SizedBox(height: 12),
@@ -74,17 +70,9 @@ class _PlansTitle extends StatelessWidget {
 }
 
 class _PlansCountry extends StatelessWidget {
-  const _PlansCountry({
-    required this.fromCity,
-    required this.fromCountry,
-    required this.toCity,
-    required this.toCountry,
-  });
+  const _PlansCountry({required this.plan});
 
-  final String fromCity;
-  final String fromCountry;
-  final String toCity;
-  final String toCountry;
+  final Plan plan;
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +85,7 @@ class _PlansCountry extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                fromCity,
+                plan.departure.city,
                 style: TextStyle(
                   color: AppColors.primaryWhite40,
                   fontSize: 14,
@@ -105,7 +93,7 @@ class _PlansCountry extends StatelessWidget {
                 ),
               ),
               Text(
-                fromCountry,
+                plan.departure.country,
                 style: const TextStyle(
                   color: AppColors.primaryWhite,
                   fontSize: 20,
@@ -124,7 +112,7 @@ class _PlansCountry extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                toCity,
+                plan.arrival.city,
                 style: TextStyle(
                   color: AppColors.primaryWhite40,
                   fontSize: 14,
@@ -132,7 +120,7 @@ class _PlansCountry extends StatelessWidget {
                 ),
               ),
               Text(
-                toCountry,
+                plan.arrival.country,
                 style: const TextStyle(
                   color: AppColors.primaryWhite,
                   fontSize: 20,
@@ -149,11 +137,9 @@ class _PlansCountry extends StatelessWidget {
 }
 
 class _PlansPrice extends StatelessWidget {
-  const _PlansPrice({
-    required this.price,
-  });
+  const _PlansPrice({required this.price});
 
-  final int price;
+  final String price;
 
   @override
   Widget build(BuildContext context) {
@@ -192,9 +178,7 @@ class _PlansPrice extends StatelessWidget {
 }
 
 class _PlansCardButton extends StatelessWidget {
-  const _PlansCardButton({
-    required this.onPressed,
-  });
+  const _PlansCardButton({required this.onPressed});
 
   final void Function() onPressed;
 

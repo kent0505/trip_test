@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/config/app_colors.dart';
 import '../../../core/widgets/buttons/primary_button.dart';
+import '../models/plan.dart';
 import '../widgets/plan_card.dart';
 
 class PlansPage extends StatelessWidget {
@@ -33,8 +34,76 @@ class PlansPage extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         PlansCard(
+          plan: Plan(
+            id: 1,
+            name: 'Travel to Italy',
+            departure: Flight(
+              country: 'France',
+              city: 'Paris',
+              time: '22:00',
+              airport: 'Paris Airport',
+            ),
+            arrival: Flight(
+              country: 'Italy',
+              city: 'Rome',
+              time: '12:00',
+              airport: 'Rome Airport',
+            ),
+            ticketPrice: 1500,
+            hotel: Hotel(
+              name: 'Hotel Name',
+              price: 300,
+            ),
+            notes: [
+              Note(
+                id: 1,
+                description: 'Note desc one',
+                price: 46,
+              ),
+              Note(
+                id: 2,
+                description: 'Note desc two',
+                price: 55.40,
+              ),
+            ],
+          ),
           onPressed: () {
-            context.push('/plan-detail');
+            context.push(
+              '/plan-detail',
+              extra: Plan(
+                id: 1,
+                name: 'Travel to Italy',
+                departure: Flight(
+                  country: 'France',
+                  city: 'Paris',
+                  time: '22:00',
+                  airport: 'Paris Airport',
+                ),
+                arrival: Flight(
+                  country: 'Italy',
+                  city: 'Rome',
+                  time: '12:00',
+                  airport: 'Rome Airport',
+                ),
+                ticketPrice: 1500,
+                hotel: Hotel(
+                  name: 'Hotel Name',
+                  price: 300,
+                ),
+                notes: [
+                  Note(
+                    id: 1,
+                    description: 'Note desc one',
+                    price: 46,
+                  ),
+                  Note(
+                    id: 2,
+                    description: 'Note desc two',
+                    price: 55.40,
+                  ),
+                ],
+              ),
+            );
           },
         ),
         const SizedBox(height: 8),

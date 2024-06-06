@@ -33,12 +33,10 @@ class Flight {
 }
 
 class Hotel {
-  final int id;
   final String name;
-  final String price;
+  final double price;
 
   Hotel({
-    required this.id,
     required this.name,
     required this.price,
   });

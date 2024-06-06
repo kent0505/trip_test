@@ -14,22 +14,24 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: BlocBuilder<HomeBloc, HomeState>(
-              builder: (context, state) {
-                if (state is HomeInitial) {
-                  return const PlansPage();
-                } else {
-                  return const SettingsPage();
-                }
-              },
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: BlocBuilder<HomeBloc, HomeState>(
+                builder: (context, state) {
+                  if (state is HomeInitial) {
+                    return const PlansPage();
+                  } else {
+                    return const SettingsPage();
+                  }
+                },
+              ),
             ),
-          ),
-          const _CustomNavBar(),
-        ],
+            const _CustomNavBar(),
+          ],
+        ),
       ),
     );
   }

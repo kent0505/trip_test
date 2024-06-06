@@ -36,5 +36,33 @@ class PlanBloc extends Bloc<PlanEvent, PlanState> {
       log('PlanNoteState');
       emit(PlanNoteState());
     });
+
+    on<PlanNextEvent>((event, emit) {
+      if (state is PlanInitial) {
+        emit(PlanDepartureState());
+      } else if (state is PlanDepartureState) {
+        emit(PlanArrivalState());
+      } else if (state is PlanArrivalState) {
+        emit(PlanTicketState());
+      } else if (state is PlanTicketState) {
+        emit(PlanHotelState());
+      } else if (state is PlanHotelState) {
+        emit(PlanNoteState());
+      }
+    });
+
+    on<PlanPreviousEvent>((event, emit) {
+      if (state is PlanDepartureState) {
+        emit(PlanInitial());
+      } else if (state is PlanArrivalState) {
+        emit(PlanDepartureState());
+      } else if (state is PlanTicketState) {
+        emit(PlanArrivalState());
+      } else if (state is PlanHotelState) {
+        emit(PlanTicketState());
+      } else if (state is PlanNoteState) {
+        emit(PlanHotelState());
+      }
+    });
   }
 }
