@@ -1,20 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:trip_test/core/utils.dart';
 
 import '../../../../core/config/app_colors.dart';
 import '../../models/plan.dart';
 import 'edit_button.dart';
 
-class HotelDetailCard extends StatefulWidget {
-  const HotelDetailCard({super.key, required this.plan});
+class NoteDetailCard extends StatefulWidget {
+  const NoteDetailCard({super.key, required this.plan});
 
   final Plan plan;
 
   @override
-  State<HotelDetailCard> createState() => _HotelDetailCardState();
+  State<NoteDetailCard> createState() => _NoteDetailCardState();
 }
 
-class _HotelDetailCardState extends State<HotelDetailCard> {
+class _NoteDetailCardState extends State<NoteDetailCard> {
   bool expanded = false;
 
   @override
@@ -38,16 +39,16 @@ class _HotelDetailCardState extends State<HotelDetailCard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Hotel',
+                          'Notes',
                           style: TextStyle(
                             color: AppColors.primaryWhite40,
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        Text(
-                          widget.plan.hotel.name,
-                          style: const TextStyle(
+                        const Text(
+                          'The rest of the time spend',
+                          style: TextStyle(
                             color: AppColors.primaryWhite,
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
@@ -78,7 +79,7 @@ class _HotelDetailCardState extends State<HotelDetailCard> {
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
-                            'Price per day',
+                            'Price',
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               color: AppColors.primaryWhite40,
@@ -88,7 +89,7 @@ class _HotelDetailCardState extends State<HotelDetailCard> {
                           ),
                         ),
                         Text(
-                          '${widget.plan.hotel.price}\$',
+                          '${getPlanNotesAmount(widget.plan)}',
                           style: const TextStyle(
                             color: AppColors.primaryWhite,
                             fontSize: 16,
@@ -112,27 +113,28 @@ class _HotelDetailCardState extends State<HotelDetailCard> {
         ),
         if (expanded) ...[
           EditButton(
-            title: 'Hotels',
+            title: 'Notes',
             onEdit: () {},
           ),
-          _HotelExpandedCard(plan: widget.plan)
+          for (Note note in widget.plan.notes) ...[
+            _NoteExpandedCard(note: note)
+          ]
         ],
       ],
     );
   }
 }
 
-class _HotelExpandedCard extends StatelessWidget {
-  const _HotelExpandedCard({
-    required this.plan,
-  });
+class _NoteExpandedCard extends StatelessWidget {
+  const _NoteExpandedCard({required this.note});
 
-  final Plan plan;
+  final Note note;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
         color: AppColors.primaryWhite8,
         borderRadius: BorderRadius.circular(16),
@@ -140,28 +142,13 @@ class _HotelExpandedCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 4),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                plan.arrival.city,
-                style: TextStyle(
-                  color: AppColors.primaryWhite40,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              Text(
-                plan.hotel.name,
-                style: const TextStyle(
-                  color: AppColors.primaryWhite,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  fontFamily: 'SFProTextMedium',
-                ),
-              ),
-            ],
+          Text(
+            note.description,
+            style: const TextStyle(
+              color: AppColors.primaryWhite,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
           ),
           const SizedBox(height: 8),
           Container(
@@ -175,7 +162,7 @@ class _HotelExpandedCard extends StatelessWidget {
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    'Price per day',
+                    'Price',
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: AppColors.primaryWhite40,
@@ -185,7 +172,7 @@ class _HotelExpandedCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '${plan.hotel.price}\$',
+                  '${note.price}\$',
                   style: const TextStyle(
                     color: AppColors.primaryWhite,
                     fontSize: 16,

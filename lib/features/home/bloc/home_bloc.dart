@@ -43,8 +43,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       ],
     ),
     Plan(
-      id: 1,
-      name: 'Travel to Italy',
+      id: 2,
+      name: 'Travel to USA',
       departure: Flight(
         country: 'France',
         city: 'Paris',
@@ -52,31 +52,17 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         airport: 'Paris Airport',
       ),
       arrival: Flight(
-        country: 'Italy',
-        city: 'Rome',
+        country: 'USA',
+        city: 'New-York',
         time: '12:00',
-        airport: 'Rome Airport',
+        airport: 'New-York Airport',
       ),
       ticketPrice: 1500,
-      hotel: Hotel(
-        name: 'Hotel Name',
-        price: 300,
-      ),
-      notes: [
-        Note(
-          id: 1,
-          description: 'Note desc one',
-          price: 46,
-        ),
-        Note(
-          id: 2,
-          description: 'Note desc two',
-          price: 55.40,
-        ),
-      ],
+      hotel: Hotel(name: '', price: 0),
+      notes: [],
     ),
     Plan(
-      id: 1,
+      id: 3,
       name: 'Travel to Italy',
       departure: Flight(
         country: 'France',

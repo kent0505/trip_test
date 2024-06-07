@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../config/app_colors.dart';
 
@@ -7,6 +8,7 @@ class PrimaryButton extends StatelessWidget {
     super.key,
     required this.title,
     this.icon,
+    this.svg = '',
     this.borderRadius = 16,
     this.active = true,
     required this.onPressed,
@@ -14,6 +16,7 @@ class PrimaryButton extends StatelessWidget {
 
   final String title;
   final IconData? icon;
+  final String svg;
   final double borderRadius;
   final bool active;
   final void Function() onPressed;
@@ -39,6 +42,10 @@ class PrimaryButton extends StatelessWidget {
                   icon,
                   color: AppColors.primaryWhite,
                 ),
+                const SizedBox(width: 4),
+              ],
+              if (svg.isNotEmpty) ...[
+                SvgPicture.asset('assets/icons/$svg.svg'),
                 const SizedBox(width: 4),
               ],
               Text(

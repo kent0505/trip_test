@@ -50,8 +50,8 @@ class _FlightDetailCardState extends State<FlightDetailCard> {
                           '${widget.plan.departure.country} - ${widget.plan.arrival.country}',
                           style: const TextStyle(
                             color: AppColors.primaryWhite,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ],
