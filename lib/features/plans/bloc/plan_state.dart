@@ -4,14 +4,7 @@ abstract class PlanState {}
 
 class PlanInitial extends PlanState {}
 
-class PlanDepartureState extends PlanState {}
-
-class PlanArrivalState extends PlanState {}
-
-class PlanTicketState extends PlanState {}
-
-class PlanHotelState extends PlanState {}
-
-class PlanNoteState extends PlanState {}
-
-class PlanAddedState extends PlanState {}
+class PlansLoadedState extends PlanState {
+  final List<Plan> plans;
+  PlansLoadedState({required this.plans});
+}

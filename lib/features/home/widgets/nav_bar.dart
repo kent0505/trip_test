@@ -24,7 +24,7 @@ class NavBar extends StatelessWidget {
               children: [
                 _NavBarButton(
                   title: 'Plans',
-                  active: state is HomePlans,
+                  active: state is HomeInitial,
                   onPressed: () {
                     context.read<HomeBloc>().add(ChangePageEvent(index: 0));
                   },
