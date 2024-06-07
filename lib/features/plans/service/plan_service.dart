@@ -1,10 +1,16 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
+import '../models/flight.dart';
+import '../models/hotel.dart';
+import '../models/note.dart';
 import '../models/plan.dart';
 
 class PlanService {
   PlanService() {
-    // Hive.registerAdapter(PlanAdapter());
+    Hive.registerAdapter(PlanAdapter());
+    Hive.registerAdapter(FlightAdapter());
+    Hive.registerAdapter(HotelAdapter());
+    Hive.registerAdapter(NoteAdapter());
   }
 
   List<Plan> plans = [];

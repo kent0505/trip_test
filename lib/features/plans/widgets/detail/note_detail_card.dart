@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:trip_test/core/utils.dart';
 
 import '../../../../core/config/app_colors.dart';
+import '../../models/note.dart';
 import '../../models/plan.dart';
 import 'edit_button.dart';
 

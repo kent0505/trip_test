@@ -1,5 +1,8 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'flight.dart';
+import 'hotel.dart';
+
 @HiveType(typeId: 0)
 class Plan extends HiveObject {
   @HiveField(0)
@@ -21,7 +24,7 @@ class Plan extends HiveObject {
   final Hotel hotel;
 
   @HiveField(6)
-  final List<Note> notes;
+  final List notes;
 
   Plan({
     required this.id,
@@ -34,7 +37,7 @@ class Plan extends HiveObject {
   });
 }
 
-class NoteAdapter extends TypeAdapter<Plan> {
+class PlanAdapter extends TypeAdapter<Plan> {
   @override
   final typeId = 0;
 
@@ -61,40 +64,4 @@ class NoteAdapter extends TypeAdapter<Plan> {
     writer.write(obj.hotel);
     writer.write(obj.notes);
   }
-}
-
-class Flight {
-  final String country;
-  final String city;
-  final String time;
-  final String airport;
-
-  Flight({
-    required this.country,
-    required this.city,
-    required this.time,
-    required this.airport,
-  });
-}
-
-class Hotel {
-  final String name;
-  final double price;
-
-  Hotel({
-    required this.name,
-    required this.price,
-  });
-}
-
-class Note {
-  final int id;
-  final String description;
-  final double price;
-
-  Note({
-    required this.id,
-    required this.description,
-    required this.price,
-  });
 }

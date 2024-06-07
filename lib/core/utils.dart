@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../features/plans/models/note.dart';
 import '../features/plans/models/plan.dart';
 
 bool onboarding = true;
@@ -31,4 +32,8 @@ double getPlanNotesAmount(Plan plan) {
     totalPrice += note.price;
   }
   return totalPrice;
+}
+
+int getCurrentTimestamp() {
+  return DateTime.now().millisecondsSinceEpoch ~/ 1000;
 }
