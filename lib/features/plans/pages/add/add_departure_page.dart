@@ -1,16 +1,24 @@
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/utils.dart';
 import '../../../../core/widgets/appbar/custom_appbar.dart';
 import '../../../../core/widgets/buttons/primary_button.dart';
+import '../../../../core/widgets/picker/time_picker.dart';
 import '../../../../core/widgets/textfields/time_field.dart';
 import '../../../../core/widgets/textfields/txt_field.dart';
+import '../../models/flight.dart';
+import '../../models/hotel.dart';
+import '../../models/plan.dart';
 import '../../widgets/add/stage_title.dart';
 
 class AddDeparturePage extends StatefulWidget {
-  const AddDeparturePage({super.key});
+  const AddDeparturePage({super.key, required this.name});
+
+  final String name;
 
   @override
   State<AddDeparturePage> createState() => _AddDeparturePageState();
@@ -23,6 +31,7 @@ class _AddDeparturePageState extends State<AddDeparturePage> {
   final controller4 = TextEditingController();
 
   bool active = false;
+  String pickedTime = '';
 
   void onChanged(String text) {
     setState(() {
@@ -38,10 +47,52 @@ class _AddDeparturePageState extends State<AddDeparturePage> {
     });
   }
 
+  void onNext() {
+    context.push(
+      '/add-arrival',
+      extra: Plan(
+        id: getCurrentTimestamp(),
+        name: widget.name,
+        departure: Flight(
+          country: controller1.text,
+          city: controller2.text,
+          time: controller3.text,
+          airport: controller4.text,
+        ),
+        arrival: Flight(country: '', city: '', time: '', airport: ''),
+        ticketPrice: 0,
+        hotel: Hotel(name: '', price: 0),
+        notes: [],
+      ),
+    );
+  }
+
+  void showTimePicker() {
+    showCupertinoModalPopup(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return TimePicker(
+          time: controller3.text,
+          onSave: () {
+            setState(() {
+              controller3.text = pickedTime;
+            });
+            context.pop();
+          },
+          onDateTimeChanged: (newTime) {
+            pickedTime = formatDateTime(newTime);
+          },
+        );
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
-    controller3.text = '00:12';
+    log(widget.name);
+    controller3.text = getCurrentTime();
   }
 
   @override
@@ -59,12 +110,9 @@ class _AddDeparturePageState extends State<AddDeparturePage> {
     return Scaffold(
       body: Column(
         children: [
-          CustomAppBar(
+          const CustomAppBar(
             title: 'Add plan',
             subtitle: 'Flight',
-            onPressed: () {
-              context.pop();
-            },
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -83,7 +131,10 @@ class _AddDeparturePageState extends State<AddDeparturePage> {
                   onChanged: onChanged,
                 ),
                 const SizedBox(height: 8),
-                TimeField(controller: controller3),
+                TimeField(
+                  controller: controller3,
+                  onTap: showTimePicker,
+                ),
                 const SizedBox(height: 8),
                 TxtField(
                   controller: controller4,
@@ -94,9 +145,7 @@ class _AddDeparturePageState extends State<AddDeparturePage> {
                 PrimaryButton(
                   title: 'Next',
                   active: active,
-                  onPressed: () {
-                    context.push('/plan-arrival');
-                  },
+                  onPressed: onNext,
                 ),
               ],
             ),

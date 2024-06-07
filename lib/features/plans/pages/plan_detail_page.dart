@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/widgets/appbar/custom_appbar.dart';
+import '../../../core/widgets/buttons/primary_button.dart';
+import '../bloc/plan_bloc.dart';
 import '../models/plan.dart';
 import '../widgets/detail/flight_detail_card.dart';
 import '../widgets/detail/hotel_detail_card.dart';
@@ -21,11 +24,8 @@ class PlanDetailPage extends StatelessWidget {
         child: Column(
           children: [
             CustomAppBar(
-              title: 'Add plan',
+              title: 'Plan',
               subtitle: plan.name,
-              onPressed: () {
-                context.pop();
-              },
             ),
             Expanded(
               child: ListView(
@@ -56,6 +56,16 @@ class PlanDetailPage extends StatelessWidget {
                     )
                   else
                     NoteDetailCard(plan: plan),
+                  const SizedBox(height: 16),
+                  PrimaryButton(
+                    title: 'Delete',
+                    onPressed: () {
+                      context
+                          .read<PlanBloc>()
+                          .add(DeletePlanEvent(id: plan.id));
+                      context.pop();
+                    },
+                  ),
                   const SizedBox(height: 16),
                 ],
               ),

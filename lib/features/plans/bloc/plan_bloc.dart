@@ -56,6 +56,8 @@ class PlanBloc extends Bloc<PlanEvent, PlanState> {
 
     // DELETE PLAN
     on<DeletePlanEvent>((event, emit) async {
+      log('DeletePlanEvent');
+
       _service.plans.removeWhere((element) => element.id == event.id);
       _plans = await _service.updatePlans();
       emit(PlansLoadedState(plans: _plans));

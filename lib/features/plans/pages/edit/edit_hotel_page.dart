@@ -57,15 +57,33 @@ class _EditHotelPageState extends State<EditHotelPage> {
             ),
           ),
         );
+    context.pop();
+  }
+
+  void onDelete() {
+    context.read<PlanBloc>().add(
+          EditPlanEvent(
+            plan: Plan(
+              id: widget.plan.id,
+              name: widget.plan.name,
+              departure: widget.plan.departure,
+              arrival: widget.plan.arrival,
+              ticketPrice: widget.plan.ticketPrice,
+              hotel: Hotel(name: '', price: 0),
+              notes: widget.plan.notes,
+            ),
+          ),
+        );
+    context.pop();
   }
 
   @override
   void initState() {
     super.initState();
-    print(widget.plan.id);
     if (widget.plan.hotel.name.isNotEmpty) {
       controller1.text = widget.plan.hotel.name;
       controller2.text = widget.plan.hotel.price.toString();
+      active = true;
     }
   }
 
@@ -85,9 +103,6 @@ class _EditHotelPageState extends State<EditHotelPage> {
           CustomAppBar(
             title: widget.plan.hotel.name.isNotEmpty ? 'Edit plan' : 'Add plan',
             subtitle: 'Hotel',
-            onPressed: () {
-              context.pop();
-            },
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -110,6 +125,13 @@ class _EditHotelPageState extends State<EditHotelPage> {
                   active: active,
                   onPressed: onEdit,
                 ),
+                const SizedBox(height: 16),
+                if (widget.plan.hotel.name.isNotEmpty)
+                  PrimaryButton(
+                    title: 'Delete',
+                    active: true,
+                    onPressed: onDelete,
+                  )
               ],
             ),
           ),

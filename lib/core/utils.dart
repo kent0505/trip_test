@@ -19,21 +19,56 @@ Future<void> saveBool(String key, bool value) async {
 }
 
 String getPlanTotalAmount(Plan plan) {
-  double totalPrice = plan.ticketPrice + plan.hotel.price;
-  for (Note note in plan.notes) {
-    totalPrice += note.price;
+  try {
+    double totalPrice = plan.ticketPrice + plan.hotel.price;
+    for (Note note in plan.notes) {
+      totalPrice += note.price;
+    }
+    return totalPrice.toStringAsFixed(2);
+  } catch (e) {
+    return '0';
   }
-  return totalPrice.toStringAsFixed(2);
 }
 
 double getPlanNotesAmount(Plan plan) {
-  double totalPrice = 0;
-  for (Note note in plan.notes) {
-    totalPrice += note.price;
+  try {
+    double totalPrice = 0;
+    for (Note note in plan.notes) {
+      totalPrice += note.price;
+    }
+    return totalPrice;
+  } catch (e) {
+    return 0;
   }
-  return totalPrice;
 }
 
 int getCurrentTimestamp() {
   return DateTime.now().millisecondsSinceEpoch ~/ 1000;
+}
+
+String getCurrentTime() {
+  DateTime now = DateTime.now();
+  String formattedTime =
+      "${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}";
+  return formattedTime;
+}
+
+String formatDateTime(DateTime dateTime) {
+  String formattedTime =
+      "${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}";
+  return formattedTime;
+}
+
+DateTime parseTimeString(String timeString) {
+  try {
+    List<String> parts = timeString.split(':');
+    int hour = int.parse(parts[0]);
+    int minute = int.parse(parts[1]);
+
+    DateTime now = DateTime.now();
+    DateTime dateTime = DateTime(now.year, now.month, now.day, hour, minute);
+    return dateTime;
+  } catch (e) {
+    return DateTime.now();
+  }
 }

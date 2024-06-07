@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../config/app_colors.dart';
 import '../buttons/ico_button.dart';
@@ -10,13 +11,11 @@ class CustomAppBar extends StatelessWidget {
     required this.title,
     this.subtitle = '',
     this.onSkip,
-    required this.onPressed,
   });
 
   final String title;
   final String subtitle;
   final void Function()? onSkip;
-  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,9 @@ class CustomAppBar extends StatelessWidget {
         child: Row(
           children: [
             IcoButton(
-              onPressed: onPressed,
+              onPressed: () {
+                context.pop();
+              },
               icon: Icons.arrow_back,
             ),
             const Spacer(),

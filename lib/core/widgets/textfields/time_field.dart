@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../config/app_colors.dart';
@@ -9,45 +8,20 @@ class TimeField extends StatelessWidget {
     required this.controller,
     this.hintText = '',
     this.onChanged,
+    this.onTap,
   });
 
   final TextEditingController controller;
   final String hintText;
   final void Function(String)? onChanged;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: 400,
       child: GestureDetector(
-        onTap: () {
-          showCupertinoModalPopup(
-            context: context,
-            builder: (BuildContext context) => Container(
-              height: 214,
-              color: AppColors.primaryWhite8,
-              child: SafeArea(
-                top: false,
-                child: CupertinoTheme(
-                  data: const CupertinoThemeData(
-                    textTheme: CupertinoTextThemeData(
-                      pickerTextStyle: TextStyle(
-                        color: AppColors.primaryWhite,
-                      ),
-                      primaryColor: AppColors.accent,
-                    ),
-                  ),
-                  child: CupertinoDatePicker(
-                    initialDateTime: DateTime.now(),
-                    mode: CupertinoDatePickerMode.time,
-                    use24hFormat: false,
-                    onDateTimeChanged: (DateTime newTime) {},
-                  ),
-                ),
-              ),
-            ),
-          );
-        },
+        onTap: onTap,
         child: TextField(
           controller: controller,
           keyboardType: TextInputType.number,

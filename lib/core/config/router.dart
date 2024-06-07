@@ -46,23 +46,33 @@ final routerConfig = GoRouter(
     ),
     GoRoute(
       path: '/add-departure',
-      builder: (context, state) => const AddDeparturePage(),
+      builder: (context, state) => AddDeparturePage(
+        name: state.extra as String,
+      ),
     ),
     GoRoute(
       path: '/add-arrival',
-      builder: (context, state) => const PlanArrivalPage(),
+      builder: (context, state) => PlanArrivalPage(
+        plan: state.extra as Plan,
+      ),
     ),
     GoRoute(
       path: '/add-ticket',
-      builder: (context, state) => const AddTicketPage(),
+      builder: (context, state) => AddTicketPage(
+        plan: state.extra as Plan,
+      ),
     ),
     GoRoute(
       path: '/add-hotel',
-      builder: (context, state) => const AddHotelPage(),
+      builder: (context, state) => AddHotelPage(
+        plan: state.extra as Plan,
+      ),
     ),
     GoRoute(
       path: '/add-note',
-      builder: (context, state) => const AddNotePage(),
+      builder: (context, state) => AddNotePage(
+        plan: state.extra as Plan,
+      ),
     ),
     // edit
     GoRoute(

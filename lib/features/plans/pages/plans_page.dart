@@ -28,7 +28,7 @@ class PlansPage extends StatelessWidget {
                     title: 'Add plan',
                     icon: Icons.add,
                     onPressed: () {
-                      context.push('/plan-name');
+                      context.push('/add-name');
                     },
                   ),
                 );
@@ -59,7 +59,7 @@ class PlansPage extends StatelessWidget {
                       title: 'Add plan',
                       icon: Icons.add,
                       onPressed: () {
-                        context.push('/plan-name');
+                        context.push('/add-name');
                       },
                     ),
                     const SizedBox(height: 16),
