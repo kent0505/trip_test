@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../core/config/app_colors.dart';
 import '../../../core/utils.dart';
 import '../models/plan.dart';
+import 'plans_country.dart';
 
 class PlansCard extends StatelessWidget {
   const PlansCard({
@@ -30,7 +31,7 @@ class PlansCard extends StatelessWidget {
           _PlansTitle(title: plan.name),
           Divider(height: 1, color: AppColors.primaryWhite8),
           const SizedBox(height: 12),
-          _PlansCountry(plan: plan),
+          PlansCountry(plan: plan),
           const SizedBox(height: 24),
           _PlansPrice(price: getPlanTotalAmount(plan)),
           const SizedBox(height: 8),
@@ -66,73 +67,6 @@ class _PlansTitle extends StatelessWidget {
           SvgPicture.asset('assets/icons/plane2.svg'),
         ],
       ),
-    );
-  }
-}
-
-class _PlansCountry extends StatelessWidget {
-  const _PlansCountry({required this.plan});
-
-  final Plan plan;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const SizedBox(width: 16),
-        SizedBox(
-          width: 120,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                plan.departure.city,
-                style: TextStyle(
-                  color: AppColors.primaryWhite40,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              Text(
-                plan.departure.country,
-                style: const TextStyle(
-                  color: AppColors.primaryWhite,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ],
-          ),
-        ),
-        const Spacer(),
-        SvgPicture.asset('assets/icons/plane3.svg'),
-        const Spacer(),
-        SizedBox(
-          width: 120,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                plan.arrival.city,
-                style: TextStyle(
-                  color: AppColors.primaryWhite40,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              Text(
-                plan.arrival.country,
-                style: const TextStyle(
-                  color: AppColors.primaryWhite,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(width: 16),
-      ],
     );
   }
 }
