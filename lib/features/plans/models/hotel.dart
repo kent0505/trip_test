@@ -3,10 +3,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 @HiveType(typeId: 2)
 class Hotel extends HiveObject {
   @HiveField(0)
-  final String name;
+  String name;
 
   @HiveField(1)
-  final double price;
+  double price;
 
   Hotel({
     required this.name,

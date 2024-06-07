@@ -3,10 +3,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 @HiveType(typeId: 3)
 class Note extends HiveObject {
   @HiveField(0)
-  final String description;
+  String description;
 
   @HiveField(1)
-  final double price;
+  double price;
 
   Note({
     required this.description,

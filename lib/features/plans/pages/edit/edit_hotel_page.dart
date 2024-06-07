@@ -1,22 +1,28 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:trip_test/features/plans/bloc/plan_bloc.dart';
+import 'package:trip_test/features/plans/models/hotel.dart';
 
 import '../../../../core/widgets/appbar/custom_appbar.dart';
 import '../../../../core/widgets/buttons/primary_button.dart';
 import '../../../../core/widgets/textfields/price_field.dart';
 import '../../../../core/widgets/textfields/txt_field.dart';
+import '../../models/plan.dart';
 import '../../widgets/add/stage_title.dart';
 
-class PlanHotelPage extends StatefulWidget {
-  const PlanHotelPage({super.key});
+class EditHotelPage extends StatefulWidget {
+  const EditHotelPage({super.key, required this.plan});
+
+  final Plan plan;
 
   @override
-  State<PlanHotelPage> createState() => _PlanHotelPageState();
+  State<EditHotelPage> createState() => _EditHotelPageState();
 }
 
-class _PlanHotelPageState extends State<PlanHotelPage> {
+class _EditHotelPageState extends State<EditHotelPage> {
   final controller1 = TextEditingController();
   final controller2 = TextEditingController();
 
@@ -34,9 +40,38 @@ class _PlanHotelPageState extends State<PlanHotelPage> {
     });
   }
 
+  void onEdit() {
+    context.read<PlanBloc>().add(
+          EditPlanEvent(
+            plan: Plan(
+              id: widget.plan.id,
+              name: widget.plan.name,
+              departure: widget.plan.departure,
+              arrival: widget.plan.arrival,
+              ticketPrice: widget.plan.ticketPrice,
+              hotel: Hotel(
+                name: controller1.text,
+                price: double.tryParse(controller2.text) ?? 0,
+              ),
+              notes: widget.plan.notes,
+            ),
+          ),
+        );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    print(widget.plan.id);
+    if (widget.plan.hotel.name.isNotEmpty) {
+      controller1.text = widget.plan.hotel.name;
+      controller2.text = widget.plan.hotel.price.toString();
+    }
+  }
+
   @override
   void dispose() {
-    log('DISPOSE PLAN HOTEL PAGE');
+    log('DISPOSE EDIT HOTEL PAGE');
     controller1.dispose();
     controller2.dispose();
     super.dispose();
@@ -48,7 +83,7 @@ class _PlanHotelPageState extends State<PlanHotelPage> {
       body: Column(
         children: [
           CustomAppBar(
-            title: 'Add plan',
+            title: widget.plan.hotel.name.isNotEmpty ? 'Edit plan' : 'Add plan',
             subtitle: 'Hotel',
             onPressed: () {
               context.pop();
@@ -71,11 +106,9 @@ class _PlanHotelPageState extends State<PlanHotelPage> {
                 ),
                 const SizedBox(height: 16),
                 PrimaryButton(
-                  title: 'Next',
+                  title: widget.plan.hotel.name.isNotEmpty ? 'Edit' : 'Add',
                   active: active,
-                  onPressed: () {
-                    context.push('/plan-note');
-                  },
+                  onPressed: onEdit,
                 ),
               ],
             ),

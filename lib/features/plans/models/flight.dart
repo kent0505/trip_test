@@ -3,13 +3,13 @@ import 'package:hive_flutter/hive_flutter.dart';
 @HiveType(typeId: 1)
 class Flight extends HiveObject {
   @HiveField(0)
-  final String country;
+  String country;
   @HiveField(1)
-  final String city;
+  String city;
   @HiveField(2)
-  final String time;
+  String time;
   @HiveField(3)
-  final String airport;
+  String airport;
 
   Flight({
     required this.country,

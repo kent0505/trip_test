@@ -10,14 +10,14 @@ import '../../../../core/widgets/textfields/note_field.dart';
 import '../../../../core/widgets/textfields/price_field.dart';
 import '../../widgets/add/stage_title.dart';
 
-class PlanNotePage extends StatefulWidget {
-  const PlanNotePage({super.key});
+class AddNotePage extends StatefulWidget {
+  const AddNotePage({super.key});
 
   @override
-  State<PlanNotePage> createState() => _PlanNotePageState();
+  State<AddNotePage> createState() => _AddNotePageState();
 }
 
-class _PlanNotePageState extends State<PlanNotePage> {
+class _AddNotePageState extends State<AddNotePage> {
   final controller1 = TextEditingController();
   final controller2 = TextEditingController();
 
@@ -50,6 +50,7 @@ class _PlanNotePageState extends State<PlanNotePage> {
           CustomAppBar(
             title: 'Add plan',
             subtitle: 'Notes',
+            onSkip: () {},
             onPressed: () {
               context.pop();
             },

@@ -3,26 +3,26 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:trip_test/core/utils.dart';
-import 'package:trip_test/features/plans/bloc/plan_bloc.dart';
-import 'package:trip_test/features/plans/models/plan.dart';
 
+import '../../../../core/utils.dart';
 import '../../../../core/widgets/appbar/custom_appbar.dart';
 import '../../../../core/widgets/buttons/primary_button.dart';
 import '../../../../core/widgets/textfields/txt_field.dart';
+import '../../bloc/plan_bloc.dart';
 import '../../models/flight.dart';
 import '../../models/hotel.dart';
 import '../../models/note.dart';
+import '../../models/plan.dart';
 import '../../widgets/add/stage_title.dart';
 
-class PlanNamePage extends StatefulWidget {
-  const PlanNamePage({super.key});
+class AddNamePage extends StatefulWidget {
+  const AddNamePage({super.key});
 
   @override
-  State<PlanNamePage> createState() => _PlanNamePageState();
+  State<AddNamePage> createState() => _AddNamePageState();
 }
 
-class _PlanNamePageState extends State<PlanNamePage> {
+class _AddNamePageState extends State<AddNamePage> {
   final controller = TextEditingController();
 
   bool active = false;
@@ -43,7 +43,7 @@ class _PlanNamePageState extends State<PlanNamePage> {
           AddPlanEvent(
             plan: Plan(
               id: getCurrentTimestamp(),
-              name: 'Travel to Italy',
+              name: 'Travel to USA',
               departure: Flight(
                 country: 'Uzbekistan',
                 city: 'Tashkent',
@@ -58,8 +58,8 @@ class _PlanNamePageState extends State<PlanNamePage> {
               ),
               ticketPrice: 500,
               hotel: Hotel(
-                name: 'The Plaza Hotel',
-                price: 2000,
+                name: 'HotelName',
+                price: 500,
               ),
               notes: [
                 Note(description: 'Note one', price: 20),

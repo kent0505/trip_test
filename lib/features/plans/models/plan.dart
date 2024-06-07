@@ -6,25 +6,25 @@ import 'hotel.dart';
 @HiveType(typeId: 0)
 class Plan extends HiveObject {
   @HiveField(0)
-  final int id;
+  int id;
 
   @HiveField(1)
-  final String name;
+  String name;
 
   @HiveField(2)
-  final Flight departure;
+  Flight departure;
 
   @HiveField(3)
-  final Flight arrival;
+  Flight arrival;
 
   @HiveField(4)
-  final double ticketPrice;
+  double ticketPrice;
 
   @HiveField(5)
-  final Hotel hotel;
+  Hotel hotel;
 
   @HiveField(6)
-  final List notes;
+  List notes;
 
   Plan({
     required this.id,

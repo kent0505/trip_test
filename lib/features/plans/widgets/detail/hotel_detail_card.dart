@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/config/app_colors.dart';
 import '../../models/plan.dart';
@@ -113,7 +114,9 @@ class _HotelDetailCardState extends State<HotelDetailCard> {
         if (expanded) ...[
           EditButton(
             title: 'Hotels',
-            onEdit: () {},
+            onEdit: () {
+              context.push('/edit-hotel', extra: widget.plan);
+            },
           ),
           _HotelExpandedCard(plan: widget.plan)
         ],

@@ -8,14 +8,14 @@ import '../../../../core/widgets/buttons/primary_button.dart';
 import '../../../../core/widgets/textfields/price_field.dart';
 import '../../widgets/add/stage_title.dart';
 
-class PlanTicketPage extends StatefulWidget {
-  const PlanTicketPage({super.key});
+class AddTicketPage extends StatefulWidget {
+  const AddTicketPage({super.key});
 
   @override
-  State<PlanTicketPage> createState() => _PlanTicketPageState();
+  State<AddTicketPage> createState() => _AddTicketPageState();
 }
 
-class _PlanTicketPageState extends State<PlanTicketPage> {
+class _AddTicketPageState extends State<AddTicketPage> {
   final controller = TextEditingController();
 
   bool active = false;

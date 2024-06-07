@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:trip_test/features/plans/widgets/detail/note_detail_card.dart';
 
 import '../../../core/widgets/appbar/custom_appbar.dart';
 import '../models/plan.dart';
 import '../widgets/detail/flight_detail_card.dart';
 import '../widgets/detail/hotel_detail_card.dart';
 import '../widgets/detail/not_added_card.dart';
+import '../widgets/detail/note_detail_card.dart';
 import '../widgets/detail/total_price_card.dart';
 
 class PlanDetailPage extends StatelessWidget {
@@ -40,7 +40,9 @@ class PlanDetailPage extends StatelessWidget {
                     NotAddedCard(
                       title: 'You don’t have any added hotels',
                       subtitle: 'Add to hotel to plan your trip.',
-                      onPressed: () {},
+                      onPressed: () {
+                        context.push('/edit-hotel', extra: plan);
+                      },
                     )
                   else
                     HotelDetailCard(plan: plan),
@@ -54,6 +56,7 @@ class PlanDetailPage extends StatelessWidget {
                     )
                   else
                     NoteDetailCard(plan: plan),
+                  const SizedBox(height: 16),
                 ],
               ),
             ),

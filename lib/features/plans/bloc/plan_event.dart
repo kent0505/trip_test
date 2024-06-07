@@ -15,6 +15,6 @@ class EditPlanEvent extends PlanEvent {
 }
 
 class DeletePlanEvent extends PlanEvent {
-  final String id;
+  final int id;
   DeletePlanEvent({required this.id});
 }

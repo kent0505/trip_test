@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../models/plan.dart';
@@ -11,8 +13,10 @@ class PlanBloc extends Bloc<PlanEvent, PlanState> {
   List<Plan> _plans = [];
 
   PlanBloc() : super(PlanInitial()) {
-    // GET plans
+    // GET PLANS
     on<GetPlansEvent>((event, emit) async {
+      log('GetPlansEvent');
+
       if (_service.plans.isEmpty) {
         _plans = await _service.getPlans();
         emit(PlansLoadedState(plans: _plans));
@@ -21,8 +25,10 @@ class PlanBloc extends Bloc<PlanEvent, PlanState> {
       }
     });
 
-    // ADD NOTE
+    // ADD PLAN
     on<AddPlanEvent>((event, emit) async {
+      log('AddPlanEvent');
+
       if (event.plan.name.isNotEmpty) {
         _service.plans.add(event.plan);
         _plans = await _service.updatePlans();
@@ -30,20 +36,25 @@ class PlanBloc extends Bloc<PlanEvent, PlanState> {
       }
     });
 
-    // EDIT NOTE
+    // EDIT PLAN
     on<EditPlanEvent>((event, emit) async {
+      log('EditPlanEvent');
+
       for (Plan plan in _service.plans) {
         if (plan.id == event.plan.id) {
-          // plan.title = event.plan.title;
-          // plan.description = event.plan.description;
-          // plan.pinned = event.plan.pinned;
+          plan.name = event.plan.name;
+          plan.departure = event.plan.departure;
+          plan.arrival = event.plan.arrival;
+          plan.ticketPrice = event.plan.ticketPrice;
+          plan.hotel = event.plan.hotel;
+          plan.notes = event.plan.notes;
         }
       }
       _plans = await _service.updatePlans();
       emit(PlansLoadedState(plans: _plans));
     });
 
-    // DELETE NOTE
+    // DELETE PLAN
     on<DeletePlanEvent>((event, emit) async {
       _service.plans.removeWhere((element) => element.id == event.id);
       _plans = await _service.updatePlans();
