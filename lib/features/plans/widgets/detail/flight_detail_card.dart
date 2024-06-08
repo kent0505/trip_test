@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/config/app_colors.dart';
 import '../../models/plan.dart';
@@ -114,7 +115,9 @@ class _FlightDetailCardState extends State<FlightDetailCard> {
         if (expanded) ...[
           EditButton(
             title: 'Flights',
-            onEdit: () {},
+            onEdit: () {
+              context.push('/edit-name', extra: widget.plan);
+            },
           ),
           _PriceAndTime(plan: widget.plan),
           const SizedBox(height: 5),

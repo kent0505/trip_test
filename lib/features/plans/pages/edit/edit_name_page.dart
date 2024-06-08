@@ -6,16 +6,19 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/widgets/appbar/custom_appbar.dart';
 import '../../../../core/widgets/buttons/primary_button.dart';
 import '../../../../core/widgets/textfields/txt_field.dart';
+import '../../models/plan.dart';
 import '../../widgets/add/stage_title.dart';
 
-class AddNamePage extends StatefulWidget {
-  const AddNamePage({super.key});
+class EditNamePage extends StatefulWidget {
+  const EditNamePage({super.key, required this.plan});
+
+  final Plan plan;
 
   @override
-  State<AddNamePage> createState() => _AddNamePageState();
+  State<EditNamePage> createState() => _EditNamePageState();
 }
 
-class _AddNamePageState extends State<AddNamePage> {
+class _EditNamePageState extends State<EditNamePage> {
   final controller = TextEditingController();
 
   bool active = false;
@@ -31,12 +34,30 @@ class _AddNamePageState extends State<AddNamePage> {
   }
 
   void onNext() {
-    context.push('/add-departure', extra: controller.text);
+    context.push(
+      '/edit-departure',
+      extra: Plan(
+        id: widget.plan.id,
+        name: controller.text,
+        departure: widget.plan.departure,
+        arrival: widget.plan.arrival,
+        ticketPrice: widget.plan.ticketPrice,
+        hotel: widget.plan.hotel,
+        notes: widget.plan.notes,
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    controller.text = widget.plan.name;
+    active = true;
   }
 
   @override
   void dispose() {
-    log('DISPOSE ADD NAME PAGE');
+    log('DISPOSE EDIT NAME PAGE');
     controller.dispose();
     super.dispose();
   }
@@ -47,7 +68,7 @@ class _AddNamePageState extends State<AddNamePage> {
       body: Column(
         children: [
           const CustomAppBar(
-            title: 'Add plan',
+            title: 'Edit plan',
             subtitle: 'Start',
           ),
           Padding(

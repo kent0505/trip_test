@@ -7,20 +7,20 @@ import '../../features/plans/pages/add/add_name_page.dart';
 import '../../features/plans/pages/add/add_arrival_page.dart';
 import '../../features/plans/pages/add/add_note_page.dart';
 import '../../features/plans/pages/add/add_ticket_page.dart';
+import '../../features/plans/pages/edit/edit_arrival_page.dart';
+import '../../features/plans/pages/edit/edit_departure_page.dart';
 import '../../features/plans/pages/edit/edit_hotel_page.dart';
+import '../../features/plans/pages/edit/edit_name_page.dart';
+import '../../features/plans/pages/edit/edit_note_page.dart';
+import '../../features/plans/pages/edit/edit_ticket_page.dart';
 import '../../features/splash/splash_page.dart';
 import '../../features/splash/onboarding_page.dart';
 import '../../features/home/pages/home_page.dart';
 import '../../features/plans/pages/plan_detail_page.dart';
-import '../../features/splash/test_page.dart';
 
 final routerConfig = GoRouter(
   initialLocation: '/home',
   routes: [
-    GoRoute(
-      path: '/test',
-      builder: (context, state) => const TestPage(),
-    ),
     GoRoute(
       path: '/',
       builder: (context, state) => const SplashPage(),
@@ -32,12 +32,14 @@ final routerConfig = GoRouter(
     GoRoute(
       path: '/home',
       builder: (context, state) => const HomePage(),
-    ),
-    GoRoute(
-      path: '/plan-detail',
-      builder: (context, state) => PlanDetailPage(
-        plan: state.extra as Plan,
-      ),
+      routes: [
+        GoRoute(
+          path: 'plan-detail',
+          builder: (context, state) => PlanDetailPage(
+            plan: state.extra as Plan,
+          ),
+        ),
+      ],
     ),
     // add
     GoRoute(
@@ -52,7 +54,7 @@ final routerConfig = GoRouter(
     ),
     GoRoute(
       path: '/add-arrival',
-      builder: (context, state) => PlanArrivalPage(
+      builder: (context, state) => AddArrivalPage(
         plan: state.extra as Plan,
       ),
     ),
@@ -76,8 +78,38 @@ final routerConfig = GoRouter(
     ),
     // edit
     GoRoute(
+      path: '/edit-name',
+      builder: (context, state) => EditNamePage(
+        plan: state.extra as Plan,
+      ),
+    ),
+    GoRoute(
+      path: '/edit-departure',
+      builder: (context, state) => EditDeparturePage(
+        plan: state.extra as Plan,
+      ),
+    ),
+    GoRoute(
+      path: '/edit-arrival',
+      builder: (context, state) => EditArrivalPage(
+        plan: state.extra as Plan,
+      ),
+    ),
+    GoRoute(
+      path: '/edit-ticket',
+      builder: (context, state) => EditTicketPage(
+        plan: state.extra as Plan,
+      ),
+    ),
+    GoRoute(
       path: '/edit-hotel',
       builder: (context, state) => EditHotelPage(
+        plan: state.extra as Plan,
+      ),
+    ),
+    GoRoute(
+      path: '/edit-note',
+      builder: (context, state) => EditNotePage(
         plan: state.extra as Plan,
       ),
     ),

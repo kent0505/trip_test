@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../config/app_colors.dart';
@@ -89,7 +88,10 @@ class TimePicker extends StatelessWidget {
                       color: AppColors.primaryWhite8,
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    child: SvgPicture.asset('assets/icons/close.svg'),
+                    child: const Icon(
+                      Icons.close_sharp,
+                      color: AppColors.accent,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 16),

@@ -51,7 +51,7 @@ class PlansPage extends StatelessWidget {
                       PlansCard(
                         plan: plan,
                         onPressed: () {
-                          context.push('/plan-detail', extra: plan);
+                          context.push('/home/plan-detail', extra: plan);
                         },
                       ),
                     ],

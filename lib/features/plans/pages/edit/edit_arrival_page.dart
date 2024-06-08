@@ -11,26 +11,25 @@ import '../../../../core/widgets/picker/time_picker.dart';
 import '../../../../core/widgets/textfields/time_field.dart';
 import '../../../../core/widgets/textfields/txt_field.dart';
 import '../../models/flight.dart';
-import '../../models/hotel.dart';
 import '../../models/plan.dart';
 import '../../widgets/add/stage_title.dart';
 
-class AddArrivalPage extends StatefulWidget {
-  const AddArrivalPage({super.key, required this.plan});
+class EditArrivalPage extends StatefulWidget {
+  const EditArrivalPage({super.key, required this.plan});
 
   final Plan plan;
 
   @override
-  State<AddArrivalPage> createState() => _AddArrivalPageState();
+  State<EditArrivalPage> createState() => _EditArrivalPageState();
 }
 
-class _AddArrivalPageState extends State<AddArrivalPage> {
+class _EditArrivalPageState extends State<EditArrivalPage> {
   final controller1 = TextEditingController();
   final controller2 = TextEditingController();
   final controller3 = TextEditingController();
   final controller4 = TextEditingController();
 
-  bool active = false;
+  bool active = true;
   String pickedTime = '';
 
   void onChanged(String text) {
@@ -49,7 +48,7 @@ class _AddArrivalPageState extends State<AddArrivalPage> {
 
   void onNext() {
     context.push(
-      '/add-ticket',
+      '/edit-ticket',
       extra: Plan(
         id: widget.plan.id,
         name: widget.plan.name,
@@ -60,9 +59,9 @@ class _AddArrivalPageState extends State<AddArrivalPage> {
           time: controller3.text,
           airport: controller4.text,
         ),
-        ticketPrice: 0,
-        hotel: Hotel(name: '', price: 0),
-        notes: [],
+        ticketPrice: widget.plan.ticketPrice,
+        hotel: widget.plan.hotel,
+        notes: widget.plan.notes,
       ),
     );
   }
@@ -91,12 +90,15 @@ class _AddArrivalPageState extends State<AddArrivalPage> {
   @override
   void initState() {
     super.initState();
-    controller3.text = getCurrentTime();
+    controller1.text = widget.plan.arrival.country;
+    controller2.text = widget.plan.arrival.city;
+    controller3.text = widget.plan.arrival.time;
+    controller4.text = widget.plan.arrival.airport;
   }
 
   @override
   void dispose() {
-    log('DISPOSE PLAN ARRIVAL PAGE');
+    log('DISPOSE EDIT ARRIVAL PAGE');
     controller1.dispose();
     controller2.dispose();
     controller3.dispose();
@@ -110,7 +112,7 @@ class _AddArrivalPageState extends State<AddArrivalPage> {
       body: Column(
         children: [
           const CustomAppBar(
-            title: 'Add plan',
+            title: 'Edit plan',
             subtitle: 'Flight',
           ),
           Padding(

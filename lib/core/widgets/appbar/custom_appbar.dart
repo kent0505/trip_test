@@ -11,11 +11,13 @@ class CustomAppBar extends StatelessWidget {
     required this.title,
     this.subtitle = '',
     this.onSkip,
+    this.onDelete,
   });
 
   final String title;
   final String subtitle;
   final void Function()? onSkip;
+  final void Function()? onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +75,25 @@ class CustomAppBar extends StatelessWidget {
                   ),
                 ),
               ),
-            ] else
+            ] else if (onDelete != null)
+              CupertinoButton(
+                onPressed: onDelete,
+                padding: const EdgeInsets.only(right: 16),
+                child: const SizedBox(
+                  height: 44,
+                  child: Center(
+                    child: Text(
+                      'Delete',
+                      style: TextStyle(
+                        color: AppColors.accent,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            else
               const SizedBox(width: 44),
           ],
         ),

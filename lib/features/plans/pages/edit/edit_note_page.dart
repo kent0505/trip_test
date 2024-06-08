@@ -14,20 +14,20 @@ import '../../models/note.dart';
 import '../../models/plan.dart';
 import '../../widgets/add/stage_title.dart';
 
-class AddNotePage extends StatefulWidget {
-  const AddNotePage({super.key, required this.plan});
+class EditNotePage extends StatefulWidget {
+  const EditNotePage({super.key, required this.plan});
 
   final Plan plan;
 
   @override
-  State<AddNotePage> createState() => _AddNotePageState();
+  State<EditNotePage> createState() => _EditNotePageState();
 }
 
-class _AddNotePageState extends State<AddNotePage> {
+class _EditNotePageState extends State<EditNotePage> {
   List<TextEditingController> controllers1 = [];
   List<TextEditingController> controllers2 = [];
 
-  bool active = false;
+  bool active = true;
   int noteCount = 1;
 
   void onChanged(String text) {
@@ -53,29 +53,13 @@ class _AddNotePageState extends State<AddNotePage> {
       noteCount++;
       controllers1.add(TextEditingController());
       controllers2.add(TextEditingController());
+      active = false;
     });
-  }
-
-  void onSkip() {
-    context.read<PlanBloc>().add(
-          AddPlanEvent(
-            plan: Plan(
-              id: widget.plan.id,
-              name: widget.plan.name,
-              departure: widget.plan.departure,
-              arrival: widget.plan.arrival,
-              ticketPrice: widget.plan.ticketPrice,
-              hotel: widget.plan.hotel,
-              notes: [],
-            ),
-          ),
-        );
-    context.go('/home');
   }
 
   void onSave() {
     context.read<PlanBloc>().add(
-          AddPlanEvent(
+          EditPlanEvent(
             plan: Plan(
               id: widget.plan.id,
               name: widget.plan.name,
@@ -95,23 +79,30 @@ class _AddNotePageState extends State<AddNotePage> {
             ),
           ),
         );
-    context.go('/home');
+    context.pop();
   }
 
   @override
   void initState() {
     super.initState();
+    if (widget.plan.notes.isEmpty) {
+      noteCount = 1;
+    } else {
+      noteCount = widget.plan.notes.length;
+    }
     for (int i = 0; i < noteCount; i++) {
       controllers1.add(TextEditingController());
       controllers2.add(TextEditingController());
     }
-    log('Controllers len = ${controllers1.length}');
-    log('Controllers len = ${controllers2.length}');
+    for (int i = 0; i < widget.plan.notes.length; i++) {
+      controllers1[i].text = widget.plan.notes[i].description;
+      controllers2[i].text = widget.plan.notes[i].price.toString();
+    }
   }
 
   @override
   void dispose() {
-    log('DISPOSE PLAN NOTE PAGE');
+    log('DISPOSE EDIT NOTE PAGE');
     for (var controller in controllers1) {
       controller.dispose();
     }
@@ -127,10 +118,9 @@ class _AddNotePageState extends State<AddNotePage> {
       resizeToAvoidBottomInset: false,
       body: Column(
         children: [
-          CustomAppBar(
-            title: 'Add plan',
+          const CustomAppBar(
+            title: 'Edit plan',
             subtitle: 'Notes',
-            onSkip: onSkip,
           ),
           Expanded(
             child: ListView(
@@ -143,7 +133,7 @@ class _AddNotePageState extends State<AddNotePage> {
                       children: [
                         StageTitle(
                           title: 'Note',
-                          index: index,
+                          index: widget.plan.notes.isEmpty ? index : index + 1,
                           onRemove: onRemove,
                           onAdd: onAdd,
                         ),

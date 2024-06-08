@@ -77,7 +77,7 @@ class _AddHotelPageState extends State<AddHotelPage> {
 
   @override
   void dispose() {
-    log('DISPOSE PLAN HOTEL PAGE');
+    log('DISPOSE ADD HOTEL PAGE');
     controller1.dispose();
     controller2.dispose();
     super.dispose();

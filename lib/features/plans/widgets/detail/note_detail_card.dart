@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:trip_test/core/utils.dart';
 
 import '../../../../core/config/app_colors.dart';
@@ -115,7 +116,9 @@ class _NoteDetailCardState extends State<NoteDetailCard> {
         if (expanded) ...[
           EditButton(
             title: 'Notes',
-            onEdit: () {},
+            onEdit: () {
+              context.push('/edit-note', extra: widget.plan);
+            },
           ),
           for (Note note in widget.plan.notes) ...[
             _NoteExpandedCard(note: note)

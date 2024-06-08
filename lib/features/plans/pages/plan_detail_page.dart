@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/widgets/appbar/custom_appbar.dart';
-import '../../../core/widgets/buttons/primary_button.dart';
 import '../bloc/plan_bloc.dart';
 import '../models/plan.dart';
 import '../widgets/detail/flight_detail_card.dart';
@@ -26,6 +25,10 @@ class PlanDetailPage extends StatelessWidget {
             CustomAppBar(
               title: 'Plan',
               subtitle: plan.name,
+              onDelete: () {
+                context.read<PlanBloc>().add(DeletePlanEvent(id: plan.id));
+                context.pop();
+              },
             ),
             Expanded(
               child: ListView(
@@ -52,20 +55,12 @@ class PlanDetailPage extends StatelessWidget {
                       title: 'You don’t have any notes added',
                       subtitle: 'Add to notes to plan your trip.',
                       note: true,
-                      onPressed: () {},
+                      onPressed: () {
+                        context.push('/edit-note', extra: plan);
+                      },
                     )
                   else
                     NoteDetailCard(plan: plan),
-                  const SizedBox(height: 16),
-                  PrimaryButton(
-                    title: 'Delete',
-                    onPressed: () {
-                      context
-                          .read<PlanBloc>()
-                          .add(DeletePlanEvent(id: plan.id));
-                      context.pop();
-                    },
-                  ),
                   const SizedBox(height: 16),
                 ],
               ),
