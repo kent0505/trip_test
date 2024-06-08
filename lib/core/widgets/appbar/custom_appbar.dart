@@ -60,7 +60,7 @@ class CustomAppBar extends StatelessWidget {
             if (onSkip != null) ...[
               CupertinoButton(
                 onPressed: onSkip,
-                padding: const EdgeInsets.only(right: 16),
+                padding: const EdgeInsets.only(right: 22),
                 child: const SizedBox(
                   height: 44,
                   child: Center(
@@ -78,7 +78,7 @@ class CustomAppBar extends StatelessWidget {
             ] else if (onDelete != null)
               CupertinoButton(
                 onPressed: onDelete,
-                padding: const EdgeInsets.only(right: 16),
+                padding: const EdgeInsets.only(right: 22),
                 child: const SizedBox(
                   height: 44,
                   child: Center(

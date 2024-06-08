@@ -18,7 +18,7 @@ class Plan extends HiveObject {
   Flight arrival;
 
   @HiveField(4)
-  double ticketPrice;
+  int ticketPrice;
 
   @HiveField(5)
   Hotel hotel;

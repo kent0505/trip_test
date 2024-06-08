@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -78,7 +76,7 @@ class _AddHotelPageState extends State<AddHotelPage> {
         ticketPrice: widget.plan.ticketPrice,
         hotel: Hotel(
           name: controller1.text,
-          price: double.tryParse(controller2.text) ?? 0,
+          price: int.tryParse(controller2.text) ?? 0,
         ),
         notes: [],
       ),
@@ -87,7 +85,6 @@ class _AddHotelPageState extends State<AddHotelPage> {
 
   @override
   void dispose() {
-    log('DISPOSE ADD HOTEL PAGE');
     controller1.dispose();
     controller2.dispose();
     super.dispose();

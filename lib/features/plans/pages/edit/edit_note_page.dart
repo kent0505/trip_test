@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -72,7 +70,7 @@ class _EditNotePageState extends State<EditNotePage> {
                 (index) {
                   return Note(
                     description: controllers1[index].text,
-                    price: double.tryParse(controllers2[index].text) ?? 0,
+                    price: int.tryParse(controllers2[index].text) ?? 0,
                   );
                 },
               ),
@@ -87,6 +85,7 @@ class _EditNotePageState extends State<EditNotePage> {
     super.initState();
     if (widget.plan.notes.isEmpty) {
       noteCount = 1;
+      active = false;
     } else {
       noteCount = widget.plan.notes.length;
     }
@@ -102,7 +101,6 @@ class _EditNotePageState extends State<EditNotePage> {
 
   @override
   void dispose() {
-    log('DISPOSE EDIT NOTE PAGE');
     for (var controller in controllers1) {
       controller.dispose();
     }
@@ -157,6 +155,7 @@ class _EditNotePageState extends State<EditNotePage> {
                     );
                   },
                 ),
+                if (noteCount == 0) const SizedBox(height: 16),
                 PrimaryButton(
                   title: 'Save',
                   active: active,

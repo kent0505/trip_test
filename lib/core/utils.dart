@@ -20,19 +20,19 @@ Future<void> saveBool(String key, bool value) async {
 
 String getPlanTotalAmount(Plan plan) {
   try {
-    double totalPrice = plan.ticketPrice + plan.hotel.price;
+    int totalPrice = plan.ticketPrice + plan.hotel.price;
     for (Note note in plan.notes) {
       totalPrice += note.price;
     }
-    return totalPrice.toStringAsFixed(2);
+    return totalPrice.toString();
   } catch (e) {
     return '0';
   }
 }
 
-double getPlanNotesAmount(Plan plan) {
+int getPlanNotesAmount(Plan plan) {
   try {
-    double totalPrice = 0;
+    int totalPrice = 0;
     for (Note note in plan.notes) {
       totalPrice += note.price;
     }

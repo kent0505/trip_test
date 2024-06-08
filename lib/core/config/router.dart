@@ -19,7 +19,7 @@ import '../../features/home/pages/home_page.dart';
 import '../../features/plans/pages/plan_detail_page.dart';
 
 final routerConfig = GoRouter(
-  initialLocation: '/home',
+  initialLocation: '/',
   routes: [
     GoRoute(
       path: '/',

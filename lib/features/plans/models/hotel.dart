@@ -6,7 +6,7 @@ class Hotel extends HiveObject {
   String name;
 
   @HiveField(1)
-  double price;
+  int price;
 
   Hotel({
     required this.name,

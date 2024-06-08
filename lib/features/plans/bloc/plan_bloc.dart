@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../models/plan.dart';
@@ -13,10 +11,7 @@ class PlanBloc extends Bloc<PlanEvent, PlanState> {
   List<Plan> _plans = [];
 
   PlanBloc() : super(PlanInitial()) {
-    // GET PLANS
     on<GetPlansEvent>((event, emit) async {
-      log('GetPlansEvent');
-
       if (_service.plans.isEmpty) {
         _plans = await _service.getPlans();
         emit(PlansLoadedState(plans: _plans));
@@ -25,10 +20,7 @@ class PlanBloc extends Bloc<PlanEvent, PlanState> {
       }
     });
 
-    // ADD PLAN
     on<AddPlanEvent>((event, emit) async {
-      log('AddPlanEvent');
-
       if (event.plan.name.isNotEmpty) {
         _service.plans.add(event.plan);
         _plans = await _service.updatePlans();
@@ -36,10 +28,7 @@ class PlanBloc extends Bloc<PlanEvent, PlanState> {
       }
     });
 
-    // EDIT PLAN
     on<EditPlanEvent>((event, emit) async {
-      log('EditPlanEvent');
-
       for (Plan plan in _service.plans) {
         if (plan.id == event.plan.id) {
           plan.name = event.plan.name;
@@ -54,10 +43,7 @@ class PlanBloc extends Bloc<PlanEvent, PlanState> {
       emit(PlansLoadedState(plans: _plans));
     });
 
-    // DELETE PLAN
     on<DeletePlanEvent>((event, emit) async {
-      log('DeletePlanEvent');
-
       _service.plans.removeWhere((element) => element.id == event.id);
       _plans = await _service.updatePlans();
       emit(PlansLoadedState(plans: _plans));

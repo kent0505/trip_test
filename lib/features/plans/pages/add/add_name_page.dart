@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -36,7 +34,6 @@ class _AddNamePageState extends State<AddNamePage> {
 
   @override
   void dispose() {
-    log('DISPOSE ADD NAME PAGE');
     controller.dispose();
     super.dispose();
   }

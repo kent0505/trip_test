@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:trip_test/core/utils.dart';
 
 import '../../core/config/app_colors.dart';
+import '../../core/utils.dart';
 import '../../core/widgets/buttons/primary_button.dart';
 import '../../core/widgets/buttons/txt_button.dart';
 import 'widgets/logo_widget.dart';
@@ -12,9 +12,6 @@ class OnboardingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(
-        "${MediaQuery.of(context).size.height} X ${MediaQuery.of(context).size.width}");
-
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),

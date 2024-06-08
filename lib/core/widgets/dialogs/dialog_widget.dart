@@ -8,8 +8,8 @@ class DialogWidget extends StatelessWidget {
   const DialogWidget({
     super.key,
     required this.title,
-    this.yesText = 'ДА',
-    this.noText = 'ОТМЕНА',
+    this.yesText = 'YES',
+    this.noText = 'CANCEL',
     this.height = 150,
     this.children = const [],
     required this.onPressed,

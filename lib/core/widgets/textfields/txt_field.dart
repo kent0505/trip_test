@@ -17,7 +17,7 @@ class TxtField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 400,
+      // width: 400,
       child: TextField(
         controller: controller,
         textCapitalization: TextCapitalization.sentences,

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'home_event.dart';
@@ -10,11 +8,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<ChangePageEvent>((event, emit) {
       if (event.index == 0) {
         if (state is HomeInitial) return;
-        log('HomeInitial');
         emit(HomeInitial());
       } else {
         if (state is HomeSettings) return;
-        log('HomeSettings');
         emit(HomeSettings());
       }
     });

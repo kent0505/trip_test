@@ -15,7 +15,7 @@ class NoteField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 400,
+      // width: 400,
       height: 120,
       child: TextField(
         controller: controller,

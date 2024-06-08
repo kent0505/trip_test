@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -91,13 +89,11 @@ class _AddDeparturePageState extends State<AddDeparturePage> {
   @override
   void initState() {
     super.initState();
-    log(widget.name);
     controller3.text = getCurrentTime();
   }
 
   @override
   void dispose() {
-    log('DISPOSE PLAN DEPARTURE PAGE');
     controller1.dispose();
     controller2.dispose();
     controller3.dispose();

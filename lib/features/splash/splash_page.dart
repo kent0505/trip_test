@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -20,11 +18,10 @@ class _SplashPageState extends State<SplashPage> {
       (value) {
         Future.delayed(const Duration(seconds: 1), () {
           if (onboarding) {
-            log('onboarding');
             context.go('/onboarding');
           } else {
-            log('home');
             context.go('/home');
+            // context.go('/onboarding');
           }
         });
       },

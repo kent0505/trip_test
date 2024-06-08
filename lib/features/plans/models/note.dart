@@ -6,7 +6,7 @@ class Note extends HiveObject {
   String description;
 
   @HiveField(1)
-  double price;
+  int price;
 
   Note({
     required this.description,

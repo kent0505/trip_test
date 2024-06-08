@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:trip_test/core/utils.dart';
 
 import '../../../../core/config/app_colors.dart';
+import '../../../../core/utils.dart';
 import '../../models/note.dart';
 import '../../models/plan.dart';
 import 'edit_button.dart';
@@ -91,7 +91,7 @@ class _NoteDetailCardState extends State<NoteDetailCard> {
                           ),
                         ),
                         Text(
-                          '${getPlanNotesAmount(widget.plan)}',
+                          '${getPlanNotesAmount(widget.plan)}\$',
                           style: const TextStyle(
                             color: AppColors.primaryWhite,
                             fontSize: 16,
@@ -148,6 +148,8 @@ class _NoteExpandedCard extends StatelessWidget {
         children: [
           Text(
             note.description,
+            maxLines: 4,
+            overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               color: AppColors.primaryWhite,
               fontSize: 16,

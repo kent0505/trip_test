@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:trip_test/core/widgets/dialogs/dialog_widget.dart';
 
 import '../../../core/widgets/appbar/custom_appbar.dart';
+import '../../../core/widgets/dialogs/dialog_widget.dart';
 import '../bloc/plan_bloc.dart';
 import '../models/plan.dart';
 import '../widgets/detail/flight_detail_card.dart';
@@ -31,7 +31,7 @@ class PlanDetailPage extends StatelessWidget {
                   context: context,
                   builder: (context) {
                     return DialogWidget(
-                      title: 'Delete?',
+                      title: 'Delete plan?',
                       onPressed: () {
                         context
                             .read<PlanBloc>()

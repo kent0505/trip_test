@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -57,7 +55,6 @@ class _EditNamePageState extends State<EditNamePage> {
 
   @override
   void dispose() {
-    log('DISPOSE EDIT NAME PAGE');
     controller.dispose();
     super.dispose();
   }

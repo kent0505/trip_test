@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -88,7 +86,7 @@ class _AddNotePageState extends State<AddNotePage> {
                 (index) {
                   return Note(
                     description: controllers1[index].text,
-                    price: double.tryParse(controllers2[index].text) ?? 0,
+                    price: int.tryParse(controllers2[index].text) ?? 0,
                   );
                 },
               ),
@@ -105,13 +103,10 @@ class _AddNotePageState extends State<AddNotePage> {
       controllers1.add(TextEditingController());
       controllers2.add(TextEditingController());
     }
-    log('Controllers len = ${controllers1.length}');
-    log('Controllers len = ${controllers2.length}');
   }
 
   @override
   void dispose() {
-    log('DISPOSE PLAN NOTE PAGE');
     for (var controller in controllers1) {
       controller.dispose();
     }

@@ -1,11 +1,10 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/widgets/appbar/custom_appbar.dart';
 import '../../../../core/widgets/buttons/primary_button.dart';
+import '../../../../core/widgets/dialogs/dialog_widget.dart';
 import '../../../../core/widgets/textfields/price_field.dart';
 import '../../../../core/widgets/textfields/txt_field.dart';
 import '../../bloc/plan_bloc.dart';
@@ -51,7 +50,7 @@ class _EditHotelPageState extends State<EditHotelPage> {
               ticketPrice: widget.plan.ticketPrice,
               hotel: Hotel(
                 name: controller1.text,
-                price: double.tryParse(controller2.text) ?? 0,
+                price: int.tryParse(controller2.text) ?? 0,
               ),
               notes: widget.plan.notes,
             ),
@@ -61,20 +60,30 @@ class _EditHotelPageState extends State<EditHotelPage> {
   }
 
   void onDelete() {
-    context.read<PlanBloc>().add(
-          EditPlanEvent(
-            plan: Plan(
-              id: widget.plan.id,
-              name: widget.plan.name,
-              departure: widget.plan.departure,
-              arrival: widget.plan.arrival,
-              ticketPrice: widget.plan.ticketPrice,
-              hotel: Hotel(name: '', price: 0),
-              notes: widget.plan.notes,
-            ),
-          ),
+    showDialog(
+      context: context,
+      builder: (context) {
+        return DialogWidget(
+          title: 'Delete hotel?',
+          onPressed: () {
+            context.read<PlanBloc>().add(
+                  EditPlanEvent(
+                    plan: Plan(
+                      id: widget.plan.id,
+                      name: widget.plan.name,
+                      departure: widget.plan.departure,
+                      arrival: widget.plan.arrival,
+                      ticketPrice: widget.plan.ticketPrice,
+                      hotel: Hotel(name: '', price: 0),
+                      notes: widget.plan.notes,
+                    ),
+                  ),
+                );
+            context.pop();
+          },
         );
-    context.pop();
+      },
+    );
   }
 
   @override
@@ -89,7 +98,6 @@ class _EditHotelPageState extends State<EditHotelPage> {
 
   @override
   void dispose() {
-    log('DISPOSE EDIT HOTEL PAGE');
     controller1.dispose();
     controller2.dispose();
     super.dispose();

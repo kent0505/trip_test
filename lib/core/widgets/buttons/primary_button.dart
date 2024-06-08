@@ -33,7 +33,7 @@ class PrimaryButton extends StatelessWidget {
         padding: EdgeInsets.zero,
         onPressed: active ? onPressed : null,
         child: SizedBox(
-          width: 400,
+          // width: 400,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

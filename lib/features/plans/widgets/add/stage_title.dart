@@ -22,7 +22,7 @@ class StageTitle extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: SizedBox(
         height: 22,
-        width: 400,
+        // width: 400,
         child: Row(
           children: [
             Text(

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -98,7 +96,6 @@ class _EditArrivalPageState extends State<EditArrivalPage> {
 
   @override
   void dispose() {
-    log('DISPOSE EDIT ARRIVAL PAGE');
     controller1.dispose();
     controller2.dispose();
     controller3.dispose();

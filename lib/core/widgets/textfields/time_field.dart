@@ -19,7 +19,7 @@ class TimeField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 400,
+      // width: 400,
       child: GestureDetector(
         onTap: onTap,
         child: TextField(
