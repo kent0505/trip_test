@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:trip_test/core/widgets/dialogs/dialog_widget.dart';
 
 import '../../../core/widgets/appbar/custom_appbar.dart';
 import '../bloc/plan_bloc.dart';
@@ -26,8 +27,20 @@ class PlanDetailPage extends StatelessWidget {
               title: 'Plan',
               subtitle: plan.name,
               onDelete: () {
-                context.read<PlanBloc>().add(DeletePlanEvent(id: plan.id));
-                context.pop();
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return DialogWidget(
+                      title: 'Delete?',
+                      onPressed: () {
+                        context
+                            .read<PlanBloc>()
+                            .add(DeletePlanEvent(id: plan.id));
+                        context.pop();
+                      },
+                    );
+                  },
+                );
               },
             ),
             Expanded(

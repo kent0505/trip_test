@@ -1,14 +1,12 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/widgets/appbar/custom_appbar.dart';
 import '../../../../core/widgets/buttons/primary_button.dart';
 import '../../../../core/widgets/textfields/price_field.dart';
 import '../../../../core/widgets/textfields/txt_field.dart';
-import '../../bloc/plan_bloc.dart';
 import '../../models/hotel.dart';
 import '../../models/plan.dart';
 import '../../widgets/add/stage_title.dart';
@@ -41,20 +39,32 @@ class _AddHotelPageState extends State<AddHotelPage> {
   }
 
   void onSkip() {
-    context.read<PlanBloc>().add(
-          AddPlanEvent(
-            plan: Plan(
-              id: widget.plan.id,
-              name: widget.plan.name,
-              departure: widget.plan.departure,
-              arrival: widget.plan.arrival,
-              ticketPrice: widget.plan.ticketPrice,
-              hotel: Hotel(name: '', price: 0),
-              notes: [],
-            ),
-          ),
-        );
-    context.go('/home');
+    // context.read<PlanBloc>().add(
+    //       AddPlanEvent(
+    //         plan: Plan(
+    //           id: widget.plan.id,
+    //           name: widget.plan.name,
+    //           departure: widget.plan.departure,
+    //           arrival: widget.plan.arrival,
+    //           ticketPrice: widget.plan.ticketPrice,
+    //           hotel: Hotel(name: '', price: 0),
+    //           notes: [],
+    //         ),
+    //       ),
+    //     );
+    // context.go('/home');
+    context.push(
+      '/add-note',
+      extra: Plan(
+        id: widget.plan.id,
+        name: widget.plan.name,
+        departure: widget.plan.departure,
+        arrival: widget.plan.arrival,
+        ticketPrice: widget.plan.ticketPrice,
+        hotel: Hotel(name: '', price: 0),
+        notes: [],
+      ),
+    );
   }
 
   void onNext() {
