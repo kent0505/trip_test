@@ -112,7 +112,10 @@ class TimePicker extends StatelessWidget {
                   pickerTextStyle: TextStyle(
                     color: AppColors.primaryWhite,
                   ),
-                  primaryColor: AppColors.accent,
+                  dateTimePickerTextStyle: TextStyle(
+                    color: AppColors.primaryWhite,
+                    fontSize: 20,
+                  ),
                 ),
               ),
               child: CupertinoDatePicker(
