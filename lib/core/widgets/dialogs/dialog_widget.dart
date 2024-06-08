@@ -25,9 +25,10 @@ class DialogWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: AppColors.bg,
+      backgroundColor: AppColors.grey,
       child: SizedBox(
         height: height,
+        width: MediaQuery.of(context).size.width > 300 ? 300 : null,
         child: Column(
           children: [
             const SizedBox(height: 20),
@@ -43,7 +44,7 @@ class DialogWidget extends StatelessWidget {
             const Spacer(),
             Row(
               children: [
-                const SizedBox(width: 30),
+                const SizedBox(width: 20),
                 TxtButton(
                   title: noText,
                   onPressed: () {
@@ -58,7 +59,7 @@ class DialogWidget extends StatelessWidget {
                     onPressed();
                   },
                 ),
-                const SizedBox(width: 30),
+                const SizedBox(width: 20),
               ],
             ),
             const SizedBox(height: 10),

@@ -21,9 +21,9 @@ class TimePicker extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 370,
-      decoration: BoxDecoration(
-        color: AppColors.primaryWhite8,
-        borderRadius: const BorderRadius.only(
+      decoration: const BoxDecoration(
+        color: AppColors.grey,
+        borderRadius: BorderRadius.only(
           topLeft: Radius.circular(10),
           topRight: Radius.circular(10),
         ),
