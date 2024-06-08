@@ -329,7 +329,7 @@ class _FlightCard extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'Time departure',
+                          arrival ? 'Time arrival' : 'Time departure',
                           style: TextStyle(
                             color: AppColors.primaryWhite40,
                             fontSize: 14,
